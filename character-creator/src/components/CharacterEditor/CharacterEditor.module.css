@@ -3,7 +3,17 @@
   padding-bottom: 64px;
 }
 
+.perspectiveDecoration {
+  background-color: hsl(195deg, 20%, 86%);
+  position: fixed;
+  width: 100%;
+  height: 40%;
+  bottom: 0;
+  left: 0;
+}
+
 .maxWidthWrapper {
+  position: relative;
 }
 
 .header {

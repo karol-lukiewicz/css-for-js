@@ -31,19 +31,25 @@ const ShoeCard = ({
       ? 'new-release'
       : 'default'
 
+  const PriceComponent = variant === "on-sale" ? PriceWithStrikethrough : Price;
   return (
     <Link href={`/shoe/${slug}`}>
       <Wrapper>
         <ImageWrapper>
+          {variant === 'new-release' ? <JustReleaseFlag>Just Released!</JustReleaseFlag> : null}
+          {variant === 'on-sale' ? <SaleFlag>Sale</SaleFlag> : null}
           <Image alt="" src={imageSrc} />
         </ImageWrapper>
         <Spacer size={12} />
         <Row>
           <Name>{name}</Name>
-          <Price>{formatPrice(price)}</Price>
+          <PriceComponent variant={variant}>{formatPrice(price)}</PriceComponent>
         </Row>
         <Row>
-          <ColorInfo>{pluralize('Color', numOfColors)}</ColorInfo>
+          <ColorInfo>{pluralize("Color", numOfColors)}</ColorInfo>
+          {variant === "on-sale" ? (
+            <SalePrice>{formatPrice(salePrice)}</SalePrice>
+          ) : null}
         </Row>
       </Wrapper>
     </Link>
@@ -56,8 +62,29 @@ const Link = styled.a`
   flex: 1 342px;
 `;
 
-const Wrapper = styled.article`
+const Wrapper = styled.article``;
+
+const Flag = styled.span`
+  position: absolute;
+  right: -4px;
+  top: 12px;
+  height: 32px;
+  line-height: 32px;
+  padding: 0 10px;
+  border-radius: 2px;
   
+  font-size: 14px;
+  font-weight: ${WEIGHTS.bold};
+  color: ${COLORS.white};
+`;
+
+const JustReleaseFlag = styled(Flag)`
+  background: #6868D9;
+`;
+
+const SaleFlag = styled(Flag)`
+  background: #C5295D;
+
 `;
 
 const ImageWrapper = styled.div`
@@ -81,7 +108,12 @@ const Name = styled.h3`
   color: ${COLORS.gray[900]};
 `;
 
-const Price = styled.span``;
+const Price = styled.span``
+
+const PriceWithStrikethrough = styled(Price)`
+  color: ${COLORS.gray[700]};
+  text-decoration: line-through;
+`;
 
 const ColorInfo = styled.p`
   color: ${COLORS.gray[700]};

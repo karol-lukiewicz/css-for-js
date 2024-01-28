@@ -21,6 +21,7 @@ const Header = () => {
           <NavLink href="/kids">Kids</NavLink>
           <NavLink href="/collections">Collections</NavLink>
         </Nav>
+        <AntyLogo />
       </MainHeader>
     </header>
   );
@@ -30,14 +31,18 @@ const MainHeader = styled.div`
   --main-header-gap: 48px;
   display: flex;
   height: 72px;
-  align-items: center;
-  padding: 0 32px;
+  align-items: baseline;
+  padding: 18px 32px 0;
   border-bottom: 1px solid ${COLORS.gray[300]};
-  gap: 48px;
+  gap: var(--main-header-gap);
 
-  &>*:first-child {
-    flex: 0 1 calc(138px + 199px - var(--main-header-gap));
+  & > *:first-child {
+    flex: 1;
   }
+`;
+
+const AntyLogo = styled.div`
+  flex: 1;
 `;
 
 const Nav = styled.nav`
